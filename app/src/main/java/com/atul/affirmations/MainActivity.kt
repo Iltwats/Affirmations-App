@@ -2,7 +2,12 @@ package com.atul.affirmations
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.atul.affirmations.adapter.ItemAdapter
+import com.atul.affirmations.data.Datasource
 import com.atul.affirmations.databinding.ActivityMainBinding
+import javax.sql.DataSource
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
@@ -11,13 +16,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val numbers = listOf(1,2,4,5,6,7,8)
-        println("$numbers")
-        val mutList = mutableListOf(12,34)
-        mutList.add(23)
-        mutList.remove(12)
-        print("$mutList")
+        //recyclerView
+        setupRecyclerView()
 
+    }
 
+    private fun setupRecyclerView() {
+        // initialize data
+        val dataSet = Datasource().listOfAffirmation()
+        // set Adapter
+        binding.recyclerView.adapter = ItemAdapter(this@MainActivity,dataSet)
+        binding.recyclerView.layoutManager = GridLayoutManager(this,2)
+        //binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.recyclerView.setHasFixedSize(true)
     }
 }
