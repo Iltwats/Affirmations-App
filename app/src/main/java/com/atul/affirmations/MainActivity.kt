@@ -18,7 +18,6 @@ class MainActivity : AppCompatActivity() {
 
         //recyclerView
         setupRecyclerView()
-
     }
 
     private fun setupRecyclerView() {
